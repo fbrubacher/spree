@@ -7,8 +7,12 @@ class Admin::ProductsController < Admin::BaseController
     wants.json { render :json => json_data }
   end
 
-  new_action.response do |wants|
-    wants.html {render :action => :new, :layout => false}
+  def new
+    @product = Product.new
+
+    respond_to do |format|
+      format.js # new.html.js
+    end
   end
 
   update.before :update_before
